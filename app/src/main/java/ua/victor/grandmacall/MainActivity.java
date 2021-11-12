@@ -3,6 +3,8 @@ package ua.victor.grandmacall;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.util.Log;
@@ -12,6 +14,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -28,6 +31,21 @@ public class MainActivity extends Activity {
 
     private static MainActivity instance;
     private WebView webView;
+
+    private MediaPlayer mediaPlayer;
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void playRingtone() {
+        mediaPlayer = MediaPlayer.create(this, R.raw.piano);
+        mediaPlayer.setLooping(true);
+        mediaPlayer.seekTo(0);
+        mediaPlayer.start();
+    }
+
+    private void stopRingtone() {
+        if (mediaPlayer==null) return;
+        mediaPlayer.stop();
+    }
 
     private void turnOnScreen(Context activity) {
         PowerManager powerManager = (PowerManager) activity.getSystemService(Context.POWER_SERVICE);
@@ -49,6 +67,7 @@ public class MainActivity extends Activity {
                 replace(" ", "").replace("-", "");
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,10 +115,17 @@ public class MainActivity extends Activity {
 
         instance = this;
         turnOnScreen(this);
+        playRingtone();
     }
 
     public static MainActivity getInstance() {
         return instance;
+    }
+
+    @Override
+    public void finish() {
+        stopRingtone();
+        super.finish();
     }
 
     private static class MyWebViewClient extends WebViewClient {
