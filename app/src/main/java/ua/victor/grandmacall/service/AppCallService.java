@@ -2,16 +2,10 @@ package ua.victor.grandmacall.service;
 
 import android.content.Intent;
 import android.os.Build;
-import android.os.Bundle;
-import android.os.IBinder;
 import android.telecom.Call;
-import android.telecom.CallAudioState;
 import android.telecom.InCallService;
 
 import androidx.annotation.RequiresApi;
-
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 
 import ua.victor.grandmacall.MainActivity;
 
@@ -22,7 +16,6 @@ public class AppCallService extends InCallService {
 
     public static final String EXTRA_STATE = "app.extra.state";
     public static final String EXTRA_NUMBER = "app.extra.number";
-
 
 
     @Override

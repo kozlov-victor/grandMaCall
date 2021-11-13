@@ -5,6 +5,7 @@ import android.webkit.WebView;
 
 import androidx.annotation.Nullable;
 
+import ua.victor.grandmacall.MainActivity;
 import ua.victor.grandmacall.service.AppCallService;
 import ua.victor.grandmacall.service.bridge.commands.DeviceCommand;
 import ua.victor.grandmacall.service.bridge.commands.base.Command;
@@ -21,6 +22,7 @@ public class AcceptCallCommand extends Command {
     protected Object execute(String commandId, @Nullable String jsonParams, final Activity activity, WebView webView) {
 
         if (AppCallService.currentCall!=null) AppCallService.currentCall.answer(0);
+        if (MainActivity.getInstance()!=null) MainActivity.getInstance().stopRingtone();
         return null;
 
     }

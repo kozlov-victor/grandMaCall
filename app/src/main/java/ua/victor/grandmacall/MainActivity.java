@@ -42,7 +42,7 @@ public class MainActivity extends Activity {
         mediaPlayer.start();
     }
 
-    private void stopRingtone() {
+    public void stopRingtone() {
         if (mediaPlayer==null) return;
         mediaPlayer.stop();
     }
@@ -98,7 +98,10 @@ public class MainActivity extends Activity {
             phoneNumber = clearNumber(phoneNumber);
             int state = intent.getIntExtra(AppCallService.EXTRA_STATE,-1);
             PhoneCallState phoneCallState = null;
-            if (state==2) phoneCallState = PhoneCallState.RINGING;
+            if (state==2) {
+                phoneCallState = PhoneCallState.RINGING;
+                playRingtone();
+            }
             else if (state==9) phoneCallState = PhoneCallState.STARTED;
 
             phoneCallStateInfo.setPhoneCallState(phoneCallState);
@@ -115,7 +118,6 @@ public class MainActivity extends Activity {
 
         instance = this;
         turnOnScreen(this);
-        playRingtone();
     }
 
     public static MainActivity getInstance() {
