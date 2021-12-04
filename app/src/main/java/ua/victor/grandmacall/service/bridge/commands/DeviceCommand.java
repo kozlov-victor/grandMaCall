@@ -4,4 +4,5 @@ public enum DeviceCommand {
     onCallStateChanged,
     endCall,
     acceptCall,
+    triggerLoudMode,
 }

@@ -10,6 +10,7 @@ import ua.victor.grandmacall.service.bridge.commands.CommandExecuter;
 import ua.victor.grandmacall.service.bridge.commands.DeviceCommand;
 import ua.victor.grandmacall.service.bridge.commands.impl.AcceptCallCommand;
 import ua.victor.grandmacall.service.bridge.commands.impl.EndCallCommand;
+import ua.victor.grandmacall.service.bridge.commands.impl.TriggerLoudModeCommand;
 
 public class DeviceListener {
 
@@ -17,6 +18,7 @@ public class DeviceListener {
         final CommandExecuter commandExecuter = new CommandExecuter();
         commandExecuter.registerCommand(new EndCallCommand());
         commandExecuter.registerCommand(new AcceptCallCommand());
+        commandExecuter.registerCommand(new TriggerLoudModeCommand());
 
         webView.addJavascriptInterface(new JsNativeBridge.ClientCommandCallLIstener(){
             @JavascriptInterface
